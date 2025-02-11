@@ -21,7 +21,7 @@ workflows:
         script: |
           gem install bundler
           bundle install
-      - name: Run Tests
+      - name: Run Tests on iPad
         script: |
           fastlane test
       - name: Build App
