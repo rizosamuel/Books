@@ -61,7 +61,7 @@ class APIServiceTests: XCTestCase {
                 XCTFail("Expected failure but got success")
             case .failure(let error):
                 print("error", error.type)
-                XCTAssertTrue(error.type == "no data")
+                XCTAssertTrue(error.type == "decoding error")
                 expectation.fulfill()
             }
         }
