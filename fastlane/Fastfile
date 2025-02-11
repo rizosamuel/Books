@@ -1,0 +1,28 @@
+default_platform(:ios)
+
+platform :ios do
+
+  desc "Builds the Books project"
+  lane :build do
+    gym(
+      scheme: "Books",
+      export_method: "development"
+    )
+  end
+	
+  desc "Runs Test Suite of the Books Project"
+  lane :test do
+    scan(
+      scheme: "Books",
+      devices: ["iPhone 14"]
+    )
+  end
+
+  desc "Deploys the app to CodeMagic"
+  lane :codemagic do
+    build_app(
+      scheme: "Books"
+    )
+  end
+
+end

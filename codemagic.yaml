@@ -1,0 +1,32 @@
+workflows:
+  ios-app:
+    name: iOS App Workflow
+    instance_type: mac_mini_m1
+    environment:
+      groups:
+        - apple_credentials # Store your Apple Developer credentials in Codemagic
+      vars:
+        XCODE_WORKSPACE: "Books.xcodeproj"
+        XCODE_SCHEME: "Books"
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+    scripts:
+      - name: Install Dependencies
+        script: |
+          gem install bundler
+          bundle install
+      - name: Run Tests
+        script: |
+          fastlane test
+      - name: Build App
+        script: |
+          fastlane build
+    artifacts:
+      - build/ios/ipa/*.ipa
+
